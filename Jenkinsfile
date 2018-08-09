@@ -1,9 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('Step1') {
+    stage('Static Code Analysis') {
       steps {
-        sh 'echo \'Hi I am fine\''
+        sh 'echo \'Hello\''
       }
     }
   }
