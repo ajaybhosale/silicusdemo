@@ -6,5 +6,15 @@ pipeline {
         sh 'echo \'Hello\''
       }
     }
+    stage('Unit Test Cases') {
+      steps {
+        sh 'echo \'Unit test Cases\''
+      }
+    }
+    stage('SonarQube Analysis') {
+      steps {
+        waitForQualityGate true
+      }
+    }
   }
 }
