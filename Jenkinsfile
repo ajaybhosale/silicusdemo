@@ -13,7 +13,12 @@ pipeline {
     }
     stage('SonarQube Analysis') {
       steps {
-        waitForQualityGate true
+        sh 'echo \'Sonarqube Analysis\''
+      }
+    }
+    stage('Build Docker Image') {
+      steps {
+        echo 'Docker Image'
       }
     }
   }
