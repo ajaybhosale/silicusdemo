@@ -14,8 +14,8 @@ pipeline {
     stage('SonarQube Analysis') {
       steps {
         sh '''sonar.projectName=Silicus-PHP-Demo
-sonar.projectKey=silicus-php-demo:master
-sonar.branch=-${GIT_BRANCH}
+sonar.projectKey=silicus-php-demo
+sonar.branch=master
 sonar.host.url=http://silicus.eastus.cloudapp.azure.com:9000
 sonar.sourceEncoding=UTF-8
 sonar.sources=/var/lib/jenkins/workspace/${JOB_NAME}/
