@@ -37,5 +37,10 @@ pipeline {
         echo 'Docker Image'
       }
     }
+    stage('Delete Workspace') {
+      steps {
+        cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, cleanWhenSuccess: true, cleanupMatrixParent: true, deleteDirs: true)
+      }
+    }
   }
 }
