@@ -21,14 +21,16 @@ pipeline {
         PROJECT_LANGUAGE = 'php'
       }
       steps {
-        sh '''/opt/sonar/bin/sonar-runner -Dsonar.projectName=$PROJECT_NAME \\
+        sh '''PROJECT_VERSION=1.0.$(date +%y)$(date +%j).$BUILD_NUMBER
+
+/opt/sonar/bin/sonar-runner -Dsonar.projectName=$PROJECT_NAME \\
 -Dsonar.projectKey=$PROJECT_KEY \\
 -Dsonar.branch=$GIT_BRANCH \\
 -Dsonar.host.url=$SONAR_HOST_URL \\
 -Dsonar.sourceEncoding=$PROJECT_SOURCE_ENCODING \\
 -Dsonar.sources=$WORKSPACE \\
 -Dsonar.language=$PROJECT_LANGUAGE \\
--Dsonar.projectVersion=1'''
+-Dsonar.projectVersion=$PROJECT_VERSION'''
       }
     }
     stage('Build Docker Image') {
