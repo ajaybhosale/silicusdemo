@@ -21,8 +21,9 @@ pipeline {
         PROJECT_LANGUAGE = 'php'
       }
       steps {
-        sh 'PROJECT_VERSION=1.0.$(date +%y)$(date +%j).$BUILD_NUMBER'
-        sh '''/opt/sonar/bin/sonar-runner -Dsonar.projectName=$PROJECT_NAME \\
+        sh '''PROJECT_VERSION=1.0.$(date +%y)$(date +%j).$BUILD_NUMBER
+
+/opt/sonar/bin/sonar-runner -Dsonar.projectName=$PROJECT_NAME \\
 -Dsonar.projectKey=$PROJECT_KEY \\
 -Dsonar.branch=$GIT_BRANCH \\
 -Dsonar.host.url=$SONAR_HOST_URL \\
