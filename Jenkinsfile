@@ -2,8 +2,8 @@ pipeline {
   agent any
   stages {
     stage('Static Code Analysis') {
-	  when {
-        branch 'master'  //only run these steps on the master branch
+      when {
+        branch 'master'
       }
       steps {
         sh 'echo \'Hello\''
@@ -50,19 +50,16 @@ pipeline {
         mail(subject: 'Silicus Demo Build', body: 'Hi Ajay', from: 'testmili@gmail.com', replyTo: 'testmili@gmail.com', to: 'ajay.bhosale@silicus.com', mimeType: 'text/html')
       }
     }
-    stage('Post') {
-      steps {
-        milestone(ordinal: 1, label: 'Development')
-      }
-    }
   }
   environment {
     Name = 'Ajay'
     Surname = 'Bhosale'
   }
   post {
-	success {
-	  echo 'Docker Image'
-	}
+    success {
+      echo 'Docker Image'
+
+    }
+
   }
 }
