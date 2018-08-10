@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    node {
+      label 'Build'
+    }
+
+  }
   stages {
     stage('Static Code Analysis') {
       steps {
@@ -47,5 +52,9 @@ pipeline {
         mail(subject: 'Silicus Demo Build', body: 'Hi Ajay', from: 'testmili@gmail.com', replyTo: 'testmili@gmail.com', to: 'ajay.bhosale@silicus.com', mimeType: 'text/html')
       }
     }
+  }
+  environment {
+    Name = 'Ajay'
+    Surname = 'Bhosale'
   }
 }
