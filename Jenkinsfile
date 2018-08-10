@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Static Code Analysis') {
       when {
-        branch 'master'
+        branch 'development'
       }
       steps {
         sh 'echo \'Hello\''
@@ -57,8 +57,14 @@ pipeline {
   }
   post {
     success {
-      echo 'Docker Image'
-
+      mail to: 'ajay.bhosale@silicus.com',
+          subject: "Success Pipeline: ${currentBuild.fullDisplayName}",
+          body: "Congratulations pipeline build successfully ${env.BUILD_URL}"
+    }
+	failure {      
+      mail to: 'ajay.bhosale@silicus.com',
+          subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+          body: "Something is wrong with ${env.BUILD_URL}"
     }
 
   }
