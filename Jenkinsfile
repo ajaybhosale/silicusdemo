@@ -51,9 +51,5 @@ pipeline {
   environment {
     Name = 'Ajay'
     Surname = 'Bhosale'
-  }
-post {
-    failure {
-      echo 'Docker Image'
-    }  
+  } 
 }
