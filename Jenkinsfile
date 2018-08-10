@@ -39,12 +39,7 @@ pipeline {
       steps {
         echo 'Docker Image'
       }
-    }
-    stage('Delete Workspace') {
-      steps {
-        cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, cleanWhenSuccess: true, cleanupMatrixParent: true, deleteDirs: true)
-      }
-    }
+    }    
     stage('Deploy to Staging') {
       steps {
         echo 'Deploy to Staging'
@@ -58,6 +53,11 @@ pipeline {
     stage('Deploy to Production') {
       steps {
         echo 'Deploy to Production'
+      }
+    }
+	stage('Delete Workspace') {
+      steps {
+        cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, cleanWhenSuccess: true, cleanupMatrixParent: true, deleteDirs: true)
       }
     }
   }
