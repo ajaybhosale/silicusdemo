@@ -42,18 +42,20 @@ pipeline {
     }
     stage('Deploy to Staging') {
       steps {
+        input(message: 'Deploy to Staging?', id: 'deploy-to-staging', ok: 'Proceed')
         echo 'Deploy to Staging'
-        input(message: 'Deploy to Staging?', id: 'Yes', ok: 'No')
       }
     }
     stage('Deploy to UAT') {
       steps {
         echo 'Deploy to UAT'
+        input(id: 'deploy-to-uat', message: 'Deploy to UAT', ok: 'Proceed')
       }
     }
     stage('Deploy to Production') {
       steps {
         echo 'Deploy to Production'
+        input(message: 'Deploy to Production', ok: 'Proceed', id: 'deploy-to-production')
       }
     }
     stage('Delete Workspace') {
