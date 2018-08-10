@@ -46,10 +46,15 @@ pipeline {
       steps {
         mail(subject: 'Silicus Demo Build', body: 'Hi Ajay', from: 'testmili@gmail.com', replyTo: 'testmili@gmail.com', to: 'ajay.bhosale@silicus.com', mimeType: 'text/html')
       }
-    }	
+    }
+    stage('Post') {
+      steps {
+        milestone(ordinal: 1, label: 'Development')
+      }
+    }
   }
   environment {
     Name = 'Ajay'
     Surname = 'Bhosale'
-  } 
+  }
 }
