@@ -52,4 +52,11 @@ pipeline {
     Name = 'Ajay'
     Surname = 'Bhosale'
   }
+  post {
+    failure {
+      // notify users when the Pipeline fails
+      mail to: 'ajay.bhosale@silicus.com',
+          subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+          body: "Something is wrong with ${env.BUILD_URL}"
+    }
 }
