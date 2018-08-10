@@ -21,9 +21,8 @@ pipeline {
         PROJECT_LANGUAGE = 'php'
       }
       steps {
-        sh '''PROJECT_VERSION=1.0.$(date +%y)$(date +%j).$BUILD_NUMBER
-
-/opt/sonar/bin/sonar-runner -Dsonar.projectName=$PROJECT_NAME \\
+        sh 'env.PROJECT_VERSION=1.0.$(date +%y)$(date +%j).$BUILD_NUMBER'
+        sh '''/opt/sonar/bin/sonar-runner -Dsonar.projectName=$PROJECT_NAME \\
 -Dsonar.projectKey=$PROJECT_KEY \\
 -Dsonar.host.url=$SONAR_HOST_URL \\
 -Dsonar.sourceEncoding=$PROJECT_SOURCE_ENCODING \\
@@ -42,6 +41,10 @@ pipeline {
         cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, cleanWhenSuccess: true, cleanupMatrixParent: true, deleteDirs: true)
       }
     }
-	
-  }  
+    stage('Notification') {
+      steps {
+        mail(subject: 'Silicus Demo Build', body: 'Hi Ajay', from: 'testmili@gmail.com', replyTo: 'testmili@gmail.com', to: 'ajay.bhosale@silicus.com', mimeType: 'text/html')
+      }
+    }
+  }
 }
