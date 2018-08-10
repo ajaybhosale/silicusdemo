@@ -25,7 +25,6 @@ pipeline {
 
 /opt/sonar/bin/sonar-runner -Dsonar.projectName=$PROJECT_NAME \\
 -Dsonar.projectKey=$PROJECT_KEY \\
--Dsonar.branch=$GIT_BRANCH \\
 -Dsonar.host.url=$SONAR_HOST_URL \\
 -Dsonar.sourceEncoding=$PROJECT_SOURCE_ENCODING \\
 -Dsonar.sources=$WORKSPACE \\
