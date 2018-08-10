@@ -29,7 +29,7 @@ pipeline {
 -Dsonar.sourceEncoding=$PROJECT_SOURCE_ENCODING \\
 -Dsonar.sources=$WORKSPACE \\
 -Dsonar.language=$PROJECT_LANGUAGE \\
--Dsonar.projectVersion=$PROJECT_VERSION'''
+-Dsonar.projectVersion=${env.PROJECT_VERSION}'''
       }
     }
     stage('Build Docker Image') {
