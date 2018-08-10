@@ -60,4 +60,9 @@ pipeline {
     Name = 'Ajay'
     Surname = 'Bhosale'
   }
+  post {
+	success {
+	  echo 'Docker Image'
+	}
+  }
 }
