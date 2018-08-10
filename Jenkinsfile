@@ -47,16 +47,17 @@ pipeline {
         mail(subject: 'Silicus Demo Build', body: 'Hi Ajay', from: 'testmili@gmail.com', replyTo: 'testmili@gmail.com', to: 'ajay.bhosale@silicus.com', mimeType: 'text/html')
       }
     }
-  }
-  environment {
-    Name = 'Ajay'
-    Surname = 'Bhosale'
-  }
-  post {
+	post {
     failure {
       // notify users when the Pipeline fails
       mail to: 'ajay.bhosale@silicus.com',
           subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
           body: "Something is wrong with ${env.BUILD_URL}"
     }
+  }
+  environment {
+    Name = 'Ajay'
+    Surname = 'Bhosale'
+  }
+  
 }
