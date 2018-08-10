@@ -13,7 +13,7 @@ pipeline {
     }
     stage('SonarQube Analysis') {
       steps {
-        sh 'sonar-scanner -Dsonar.projectName=Silicus-PHP-Demo -Dsonar.projectKey=silicus-php-demo:master -Dsonar.branch=-${GIT_BRANCH} -Dsonar.host.url=http://silicus.eastus.cloudapp.azure.com:9000 -Dsonar.sourceEncoding=UTF-8 -Dsonar.sources=/var/lib/jenkins/workspace/${JOB_NAME}/ -Dsonar.language=php -Dsonar.projectVersion=${BUILD_NUMBER}'
+        sh '/opt/sonar/bin/sonar-runner -Dsonar.projectName=Silicus-PHP-Demo -Dsonar.projectKey=silicus-php-demo:master -Dsonar.branch=-${GIT_BRANCH} -Dsonar.host.url=http://silicus.eastus.cloudapp.azure.com:9000 -Dsonar.sourceEncoding=UTF-8 -Dsonar.sources=/var/lib/jenkins/workspace/${JOB_NAME}/ -Dsonar.language=php -Dsonar.projectVersion=${BUILD_NUMBER}'
       }
     }
     stage('Build Docker Image') {
