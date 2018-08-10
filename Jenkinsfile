@@ -12,14 +12,22 @@ pipeline {
       }
     }
     stage('SonarQube Analysis') {
+      environment {
+        PROJECT_NAME = 'Silicus-PHP-Demo'
+        PROJECT_KEY = 'silicus-php-demo:master'
+        PROJECT_BRANCH = 'master'
+        SONAR_HOST_URL = 'http://silicus.eastus.cloudapp.azure.com:9000'
+        PROJECT_SOURCE_ENCODING = 'UTF-8'
+        PROJECT_LANGUAGE = 'php'
+      }
       steps {
-        sh '''/opt/sonar/bin/sonar-runner -Dsonar.projectName=Silicus-PHP-Demo \\
--Dsonar.projectKey=silicus-php-demo:master \\
--Dsonar.branch=master \\
--Dsonar.host.url=http://silicus.eastus.cloudapp.azure.com:9000 \\
--Dsonar.sourceEncoding=UTF-8 \\
+        sh '''/opt/sonar/bin/sonar-runner -Dsonar.projectName=$PROJECT_NAME \\
+-Dsonar.projectKey=$PROJECT_KEY \\
+-Dsonar.branch=$GIT_BRANCH \\
+-Dsonar.host.url=$SONAR_HOST_URL \\
+-Dsonar.sourceEncoding=$PROJECT_SOURCE_ENCODING \\
 -Dsonar.sources=$WORKSPACE \\
--Dsonar.language=php \\
+-Dsonar.language=$PROJECT_LANGUAGE \\
 -Dsonar.projectVersion=1'''
       }
     }
