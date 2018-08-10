@@ -35,7 +35,7 @@ pipeline {
 -Dsonar.projectVersion=$PROJECT_VERSION'''
       }
     }
-    stage('Build Docker Image') {
+    stage('Deploy to Development') {
       steps {
         echo 'Docker Image'
       }
@@ -43,6 +43,21 @@ pipeline {
     stage('Delete Workspace') {
       steps {
         cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, cleanWhenSuccess: true, cleanupMatrixParent: true, deleteDirs: true)
+      }
+    }
+    stage('Deploy to Staging') {
+      steps {
+        echo 'Deploy to Staging'
+      }
+    }
+    stage('Deploy to UAT') {
+      steps {
+        echo 'Deploy to UAT'
+      }
+    }
+    stage('Deploy to Production') {
+      steps {
+        echo 'Deploy to Production'
       }
     }
   }
