@@ -45,11 +45,6 @@ pipeline {
         cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, cleanWhenSuccess: true, cleanupMatrixParent: true, deleteDirs: true)
       }
     }
-    stage('Notification') {
-      steps {
-        mail(subject: 'Silicus Demo Build', body: 'Hi Ajay', from: 'testmili@gmail.com', replyTo: 'testmili@gmail.com', to: 'ajay.bhosale@silicus.com', mimeType: 'text/html')
-      }
-    }
   }
   environment {
     Name = 'Ajay'
@@ -57,14 +52,13 @@ pipeline {
   }
   post {
     success {
-      mail to: 'ajay.bhosale@silicus.com',
-          subject: "Success Pipeline: ${currentBuild.fullDisplayName}",
-          body: "Congratulations pipeline build successfully ${env.BUILD_URL}"
+      mail(to: 'ajay.bhosale@silicus.com', subject: "Success Pipeline: ${currentBuild.fullDisplayName}", body: "Congratulations pipeline build successfully ${env.BUILD_URL}")
+
     }
-	failure {      
-      mail to: 'ajay.bhosale@silicus.com',
-          subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-          body: "Something is wrong with ${env.BUILD_URL}"
+
+    failure {
+      mail(to: 'ajay.bhosale@silicus.com', subject: "Failed Pipeline: ${currentBuild.fullDisplayName}", body: "Something is wrong with ${env.BUILD_URL}")
+
     }
 
   }
