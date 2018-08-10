@@ -39,10 +39,11 @@ pipeline {
       steps {
         echo 'Docker Image'
       }
-    }    
+    }
     stage('Deploy to Staging') {
       steps {
         echo 'Deploy to Staging'
+        input(message: 'Deploy to Staging?', id: 'Yes', ok: 'No')
       }
     }
     stage('Deploy to UAT') {
@@ -55,7 +56,7 @@ pipeline {
         echo 'Deploy to Production'
       }
     }
-	stage('Delete Workspace') {
+    stage('Delete Workspace') {
       steps {
         cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, cleanWhenSuccess: true, cleanupMatrixParent: true, deleteDirs: true)
       }
