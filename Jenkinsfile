@@ -42,7 +42,7 @@ pipeline {
     }
     stage('Deploy to Staging') {
       steps {
-        input(message: 'Deploy to Staging?', id: 'deploy-to-staging', ok: 'Proceed')
+        input(message: 'Deploy to Staging?', id: 'deploy-to-staging', ok: 'Proceed', submitter: 'ajay')
         echo 'Deploy to Staging'
       }
     }
