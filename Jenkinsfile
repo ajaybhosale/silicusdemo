@@ -3,15 +3,7 @@ pipeline {
   stages {
     stage('Static Code Analysis') {
       parallel {
-        stage('Static Code Analysis') {
-          when {
-            branch 'development'
-          }
-          steps {
-            sh 'echo \'Hello\''
-          }
-        }
-        stage('PHP copy paste test') {
+        stage('PHP CPD') {
           steps {
             sh 'echo \'Starting PHP copy paste\''
           }
@@ -100,10 +92,13 @@ pipeline {
   post {
     success {
       mail(to: 'ajay.bhosale@silicus.com', subject: "Success Pipeline: ${currentBuild.fullDisplayName}", body: "Congratulations pipeline build successfully ${env.BUILD_URL}")
+
     }
 
     failure {
       mail(to: 'ajay.bhosale@silicus.com', subject: "Failed Pipeline: ${currentBuild.fullDisplayName}", body: "Something is wrong with ${env.BUILD_URL}")
+
     }
+
   }
 }
