@@ -2,11 +2,40 @@ pipeline {
   agent any
   stages {
     stage('Static Code Analysis') {
-      when {
-        branch 'development'
-      }
-      steps {
-        sh 'echo \'Hello\''
+      parallel {
+        stage('Static Code Analysis') {
+          when {
+            branch 'development'
+          }
+          steps {
+            sh 'echo \'Hello\''
+          }
+        }
+        stage('PHP copy paste test') {
+          steps {
+            sh 'echo \'Starting PHP copy paste\''
+          }
+        }
+        stage('Calculating LOC') {
+          steps {
+            sh 'echo \'Calculating LOC\''
+          }
+        }
+        stage('PHP Code Sniffer') {
+          steps {
+            sh 'echo \'Code sniffer test\''
+          }
+        }
+        stage('PHP Depend') {
+          steps {
+            sh 'echo \'PHP Depend\''
+          }
+        }
+        stage('PHP MD') {
+          steps {
+            sh 'echo \'PHP MD test\''
+          }
+        }
       }
     }
     stage('Unit Test Cases') {
@@ -42,7 +71,7 @@ pipeline {
     }
     stage('Deploy to Staging') {
       steps {
-        input(message: 'Deploy to Staging?', id: 'deploy-to-staging', ok: 'Proceed')
+        input(message: 'Deploy to Staging?', id: 'deploy-to-staging', ok: 'Proceed', submitter: 'ajay', submitterParameter: 'yes')
         echo 'Deploy to Staging'
       }
     }
