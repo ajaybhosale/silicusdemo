@@ -30,7 +30,7 @@ pipeline {
         }
       }
     }
-    stage('Unit Test Cases...') {
+    stage('Unit Test Cases') {
       steps {
         sh 'echo \'Unit test Cases\''
       }
