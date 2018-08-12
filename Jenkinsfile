@@ -60,6 +60,7 @@ pipeline {
       steps {
         echo 'Docker Image'
         mail(subject: 'SilicusDemo Approval ', body: "Hi, Please take a action on new build  <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>", to: 'ajay.bhosale@silicus.com', replyTo: 'testmili@gmail.com', mimeType: 'text/html', from: 'testmili@gmail.com')
+        azureWebAppPublish(azureCredentialsId: 'e0cf6c73-37f0-43dc-924b-0cdb83324f38', appName: 'silicusphpdemo', resourceGroup: 'silicusResourceGroup', publishType: 'docker', dockerFilePath: '**/Dockerfile', deployOnlyIfSuccessful: true, dockerImageTag: '$BUILD_NUMBER', dockerImageName: 'silicusphpdemo')
       }
     }
     stage('Deploy to Staging') {
