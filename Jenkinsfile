@@ -59,6 +59,7 @@ pipeline {
     stage('Deploy to Development') {
       steps {
         echo 'Docker Image'
+        mail(subject: 'SilicusDemo Approval ', body: 'Hi, Please take a action on new build  ${env.BUILD_URL}', to: 'ajay.bhosale@silicus.com', replyTo: 'testmili@gmail.com', mimeType: 'text/html', from: 'testmili@gmail.com')
       }
     }
     stage('Deploy to Staging') {
