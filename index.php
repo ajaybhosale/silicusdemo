@@ -1,4 +1,4 @@
 <?php
 phpinfo();
 ?>
-Hi This is Ajay
+Hi This is Ajay ....
