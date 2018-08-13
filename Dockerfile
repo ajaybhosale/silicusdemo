@@ -1,13 +1,9 @@
-FROM phnxditeastuscr.azurecr.io/phnx-dit-base:v1
+FROM silicus.azurecr.io/silicus-php-dit:v1
 
 MAINTAINER Ajay Bhosale<ajay.bhosale@silicus.com>
 
 # Pull Source Code
-COPY workspace /var/www/html/workspace
+COPY index.php /var/www/html/
 
 # Laravel required commands
-WORKDIR /var/www/html/workspace
-
-RUN chmod 777 .env && \
-	chmod -R 777 storage && \	 
-	php artisan cache:clear
+WORKDIR /var/www/html/
