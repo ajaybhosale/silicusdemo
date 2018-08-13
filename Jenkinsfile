@@ -57,9 +57,19 @@ pipeline {
       }
     }
     stage('Deploy to Development') {
+      environment {
+        AZURE_CR_USERNAME = 'silicus'
+        AZURE_CR_PASSWORD = '5zNvbJC7tidlPx/erzMysNuPwx5IRREF'
+        AZURE_CR_Login = 'silicus.azurecr.io'
+        AZURE_CR_IMAGE = 'silicus-php-demo-dit'
+      }
       steps {
-        echo 'Docker Image'
-        azureWebAppPublish(azureCredentialsId: 'e0cf6c73-37f0-43dc-924b-0cdb83324f38', appName: 'silicusphpdemo', resourceGroup: 'silicusResourceGroup', publishType: 'docker')
+        sh '''docker login --username silicus --password 5zNvbJC7tidlPx/erzMysNuPwx5IRREF silicus.azurecr.io
+docker build -t silicus-php-demo-dit .
+docker tag silicus-php-demo-dit silicus.azurecr.io/silicus-php-demo-dit:latest
+docker tag silicus-php-demo-dit silicus.azurecr.io/silicus-php-demo-dit:1
+docker push silicus.azurecr.io/silicus-php-demo-dit:latest
+docker push silicus.azurecr.io/silicus-php-demo-dit:1'''
         mail(subject: 'SilicusDemo Approval ', body: "Hi, Please take a action on new build  <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>", to: 'ajay.bhosale@silicus.com', replyTo: 'testmili@gmail.com', mimeType: 'text/html', from: 'testmili@gmail.com')
       }
     }
