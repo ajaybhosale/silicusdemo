@@ -1,9 +1,9 @@
-FROM webdevops/php-nginx:latest
+FROM silicus.azurecr.io/silicus-php-demo-base:v1
 
 MAINTAINER Ajay Bhosale<ajay.bhosale@silicus.com>
 
 # Pull Source Code
-COPY index.php /var/www/html/
+COPY workspace /var/www/html/workspace
 
 # Laravel required commands
-WORKDIR /var/www/html/
+WORKDIR /var/www/html/workspace
