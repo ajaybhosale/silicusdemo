@@ -1,4 +1,4 @@
-FROM silicus.azurecr.io/silicus-php-dit:v1
+FROM webdevops/php-nginx:latest
 
 MAINTAINER Ajay Bhosale<ajay.bhosale@silicus.com>
 
