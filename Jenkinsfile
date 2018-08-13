@@ -64,8 +64,7 @@ pipeline {
         AZURE_CR_IMAGE = 'silicus-php-demo-dit'
       }
       steps {
-        sh '''whoami
-docker login --username silicus --password 5zNvbJC7tidlPx/erzMysNuPwx5IRREF silicus.azurecr.io
+        sh '''docker login --username silicus --password 5zNvbJC7tidlPx/erzMysNuPwx5IRREF silicus.azurecr.io
 docker build -t silicus-php-demo-dit .
 docker tag silicus-php-demo-dit silicus.azurecr.io/silicus-php-demo-dit:latest
 docker tag silicus-php-demo-dit silicus.azurecr.io/silicus-php-demo-dit:1
@@ -77,19 +76,34 @@ docker push silicus.azurecr.io/silicus-php-demo-dit:1'''
     stage('Deploy to Staging') {
       steps {
         input(message: 'Deploy to Staging?', id: 'deploy-to-staging', ok: 'Proceed', submitter: 'ajay', submitterParameter: 'yes')
-        echo 'Deploy to Staging'
+        sh '''docker login --username silicus --password 5zNvbJC7tidlPx/erzMysNuPwx5IRREF silicus.azurecr.io
+docker build -t silicus-php-demo-sit .
+docker tag silicus-php-demo-dit silicus.azurecr.io/silicus-php-demo-sit:latest
+docker tag silicus-php-demo-dit silicus.azurecr.io/silicus-php-demo-sit:1
+docker push silicus.azurecr.io/silicus-php-demo-sit:latest
+docker push silicus.azurecr.io/silicus-php-demo-sit:1'''
       }
     }
     stage('Deploy to UAT') {
       steps {
-        echo 'Deploy to UAT'
-        input(id: 'deploy-to-uat', message: 'Deploy to UAT', ok: 'Proceed')
+        input(id: 'deploy-to-uat', message: 'Deploy to UAT', ok: 'Proceed', submitter: 'ajay', submitterParameter: 'yes')
+        sh '''docker login --username silicus --password 5zNvbJC7tidlPx/erzMysNuPwx5IRREF silicus.azurecr.io
+docker build -t silicus-php-demo-uat .
+docker tag silicus-php-demo-dit silicus.azurecr.io/silicus-php-demo-uat:latest
+docker tag silicus-php-demo-dit silicus.azurecr.io/silicus-php-demo-uat:1
+docker push silicus.azurecr.io/silicus-php-demo-uat:latest
+docker push silicus.azurecr.io/silicus-php-demo-uat:1'''
       }
     }
     stage('Deploy to Production') {
       steps {
-        echo 'Deploy to Production'
-        input(message: 'Deploy to Production', ok: 'Proceed', id: 'deploy-to-production')
+        input(message: 'Deploy to Production', ok: 'Proceed', id: 'deploy-to-production', submitter: 'ajay', submitterParameter: 'yes')
+        sh '''docker login --username silicus --password 5zNvbJC7tidlPx/erzMysNuPwx5IRREF silicus.azurecr.io
+docker build -t silicus-php-demo-prod .
+docker tag silicus-php-demo-dit silicus.azurecr.io/silicus-php-demo-prod:latest
+docker tag silicus-php-demo-dit silicus.azurecr.io/silicus-php-demo-prod:1
+docker push silicus.azurecr.io/silicus-php-demo-prod:latest
+docker push silicus.azurecr.io/silicus-php-demo-prod:1'''
       }
     }
     stage('Delete Workspace') {
