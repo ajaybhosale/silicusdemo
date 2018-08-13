@@ -59,8 +59,8 @@ pipeline {
     stage('Deploy to Development') {
       steps {
         echo 'Docker Image'
+        azureWebAppPublish(azureCredentialsId: '76d62206-50d4-4cf9-93ed-659c5189879f', appName: 'silicusphpdemo', resourceGroup: 'silicusResourceGroup', publishType: 'docker', dockerFilePath: 'Dockerfile', deployOnlyIfSuccessful: true, dockerImageTag: '$BUILD_NUMBER', dockerImageName: 'ajaydemo', dockerRegistryEndpoint: [credentialsId: '5zNvbJC7tidlPx/erzMysNuPwx5IRREF', url: "https://silicus.azurecr.io"])
         mail(subject: 'SilicusDemo Approval ', body: "Hi, Please take a action on new build  <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>", to: 'ajay.bhosale@silicus.com', replyTo: 'testmili@gmail.com', mimeType: 'text/html', from: 'testmili@gmail.com')
-        azureWebAppPublish(azureCredentialsId: 'e0cf6c73-37f0-43dc-924b-0cdb83324f38', appName: 'silicusphpdemo', resourceGroup: 'silicusResourceGroup', publishType: 'docker', dockerFilePath: 'Dockerfile', deployOnlyIfSuccessful: true, dockerImageTag: '$BUILD_NUMBER', dockerImageName: 'silicusphpdemo', dockerRegistryEndpoint: [credentialsId: '5zNvbJC7tidlPx/erzMysNuPwx5IRREF', url: "https://silicus.azurecr.io"])
       }
     }
     stage('Deploy to Staging') {
