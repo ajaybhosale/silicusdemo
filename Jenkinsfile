@@ -64,7 +64,8 @@ pipeline {
         AZURE_CR_IMAGE = 'silicus-php-demo-dit'
       }
       steps {
-        sh '''docker login --username silicus --password 5zNvbJC7tidlPx/erzMysNuPwx5IRREF silicus.azurecr.io
+        sh '''whoami
+docker login --username silicus --password 5zNvbJC7tidlPx/erzMysNuPwx5IRREF silicus.azurecr.io
 docker build -t silicus-php-demo-dit .
 docker tag silicus-php-demo-dit silicus.azurecr.io/silicus-php-demo-dit:latest
 docker tag silicus-php-demo-dit silicus.azurecr.io/silicus-php-demo-dit:1
