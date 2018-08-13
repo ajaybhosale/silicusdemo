@@ -15,7 +15,7 @@ pipeline {
         }
         stage('PHP Code Sniffer') {
           steps {
-            sh 'phpcs --warning-severity=6 --standard=PSR2 --extensions=php'
+            sh 'phpcs --warning-severity=6 --standard=PSR2 --extensions=php workspace'
           }
         }
         stage('PHP Depend') {
