@@ -5,27 +5,32 @@ pipeline {
       parallel {
         stage('PHP CPD') {
           steps {
-            sh 'echo \'Starting PHP copy paste\''
+            sh 'phpcpd workspace'
           }
         }
         stage('Calculating LOC') {
           steps {
-            sh 'echo \'Calculating LOC\''
+            sh 'phploc workspace'
           }
         }
         stage('PHP Code Sniffer') {
           steps {
-            sh 'echo \'Code sniffer test\''
+            sh 'phpcs --warning-severity=6 --standard=PSR2 --extensions=php  --ignore=*/migrations/* workspace/modules'
           }
         }
         stage('PHP Depend') {
           steps {
-            sh 'echo \'PHP Depend\''
+            sh 'pdepend --ignore=vendor --summary-xml=/tmp/summary.xml --jdepend-chart=/tmp/jdepend.svg --overview-pyramid=/tmp/pyramid.svg workspace'
           }
         }
         stage('PHP MD') {
           steps {
-            sh 'echo \'PHP MD test\''
+            sh 'phpmd workspace/public/index.php text static_analysis/md_rulesets/cleancode.xml,static_analysis/md_rulesets/naming.xml,static_analysis/md_rulesets/codesize.xml'
+          }
+        }
+        stage('PHP Lint Test') {
+          steps {
+            sh 'php -l workspace'
           }
         }
       }
